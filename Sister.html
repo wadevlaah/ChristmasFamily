@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Christmas & New Year Card – Sister</title>
+
+  <!-- Readable cursive -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1:#0b2a1c;
+      --bg2:#7b0f16;
+      --card:#ffffffee;
+      --ink:#1b1b1b;
+      --gold:#d4af37;
+      --shadow: 0 18px 55px rgba(0,0,0,.28);
+      --radius: 22px;
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255,255,255,.12), transparent 35%),
+        radial-gradient(circle at 78% 10%, rgba(255,255,255,.10), transparent 40%),
+        radial-gradient(circle at 90% 75%, rgba(255,255,255,.10), transparent 38%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+      padding:18px;
+    }
+
+    /* subtle falling snow */
+    .snow{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,.85), transparent 60%),
+        radial-gradient(1.5px 1.5px at 90px 110px, rgba(255,255,255,.75), transparent 60%),
+        radial-gradient(2.5px 2.5px at 160px 70px, rgba(255,255,255,.70), transparent 60%),
+        radial-gradient(1.8px 1.8px at 220px 140px, rgba(255,255,255,.65), transparent 60%),
+        radial-gradient(2.2px 2.2px at 280px 40px, rgba(255,255,255,.65), transparent 60%);
+      background-size: 320px 220px;
+      animation: snowMove 10s linear infinite;
+      opacity:.55;
+      mix-blend-mode: screen;
+    }
+    @keyframes snowMove{
+      from{ transform: translateY(-30px); }
+      to{ transform: translateY(220px); }
+    }
+
+    .card{
+      width:min(920px, 100%);
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      border: 1px solid rgba(255,255,255,.45);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .topbar{
+      padding:14px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      background: linear-gradient(90deg, rgba(212,175,55,.18), rgba(255,255,255,0));
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+    .title{
+      font-weight:600;
+      letter-spacing:.2px;
+      font-size:14px;
+      opacity:.85;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, #fff, var(--gold));
+      box-shadow:0 0 0 3px rgba(212,175,55,.16);
+    }
+
+    .content{
+      padding:18px;
+    }
+
+    .heroWrap{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:16px;
+      padding:10px 0 18px;
+    }
+
+    img.hero{
+      width:100%;
+      max-height:440px;
+      object-fit:cover;
+      border-radius:18px;
+      border: 1px solid rgba(0,0,0,.08);
+      box-shadow: 0 12px 35px rgba(0,0,0,.18);
+      background:#fff;
+    }
+
+    .footerRow{
+      display:flex;
+      justify-content:center;
+      padding:0 0 18px;
+    }
+
+    button.nextBtn{
+      font-family: "Dancing Script", cursive;
+      font-weight:700;
+      font-size:26px;
+      padding:12px 34px;
+      border-radius:999px;
+      border: 2px solid rgba(212,175,55,.55);
+      background: linear-gradient(180deg, rgba(212,175,55,.22), rgba(255,255,255,.9));
+      color:#4a2b0a;
+      cursor:pointer;
+      box-shadow: 0 10px 25px rgba(0,0,0,.16);
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+    }
+    button.nextBtn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(0,0,0,.18);
+      filter: brightness(1.02);
+    }
+    button.nextBtn:active{
+      transform: translateY(0px) scale(.99);
+    }
+
+    .messageWrap{
+      display:none;
+      margin-top:16px;
+      padding:18px 18px 22px;
+      border-radius:18px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(0,0,0,.08);
+    }
+
+    .messageTitle{
+      font-family: "Dancing Script", cursive;
+      font-size:34px;
+      font-weight:700;
+      margin:0 0 10px;
+      color:#2a1b0f;
+    }
+
+    .typed{
+      font-family: "Dancing Script", cursive;
+      font-size:26px;
+      line-height:1.35;
+      font-weight:600;
+      white-space:pre-wrap;
+      min-height: 220px;
+    }
+
+    .caret{
+      display:inline-block;
+      width:10px;
+      margin-left:4px;
+      border-left: 3px solid rgba(0,0,0,.55);
+      height: 26px;
+      transform: translateY(4px);
+      animation: blink 0.8s steps(1) infinite;
+    }
+    @keyframes blink{ 50%{ opacity:0; } }
+
+    .smallNote{
+      margin-top:10px;
+      font-size:12px;
+      opacity:.65;
+    }
+
+    @media (max-width:560px){
+      .messageTitle{ font-size:30px; }
+      .typed{ font-size:22px; }
+      button.nextBtn{ font-size:24px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="snow" aria-hidden="true"></div>
+
+  <div class="card">
+    <div class="topbar">
+      <div class="title"><span class="dot"></span> Christmas & New Year Card</div>
+      <div style="font-size:12px; opacity:.7;">For Sister</div>
+    </div>
+
+    <div class="content">
+      <div class="heroWrap">
+        <img
+          id="heroImage"
+          class="hero"
+          src="https://www.lovethispic.com/uploaded_images/435757-Gingerbread-Family-Merry-Christmas-Gif.gif"
+          alt="Christmas family gif"
+        />
+
+        <div class="footerRow" id="buttonRow">
+          <button class="nextBtn" id="nextBtn" type="button">Next</button>
+        </div>
+
+        <div class="messageWrap" id="messageWrap">
+          <h2 class="messageTitle">Dear Sis,</h2>
+          <div class="typed" id="typed"></div>
+          <div class="smallNote">Wishing you a Merry Christmas and a joyful, wonderful New Year.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const page2Image =
+      "https://thumbs.dreamstime.com/b/merry-christmas-web-heading-card-gifts-xmas-trees-deers-stars-104229053.jpg";
+
+    const message = `As Christmas and the New Year come around, I want to take this chance to say thank you for everything you do for our family.
+
+I truly appreciate how much you look after all of us. You are always the cheerful one, bringing warmth and laughter wherever you go, and that makes such a big difference to our family. Your positivity and care never go unnoticed.
+
+I also really admire how you always go out of your way to help everyone, often coming up with creative ideas and little plans just so we can all have fun together. More than that, I appreciate how you look out for us and even manage to convince my brother to relax his strict rules at times so we can enjoy ourselves. Those moments mean a lot, and they create memories we will always cherish.
+
+Even though you married into our family, I want you to know this. I truly see you as my sister. Every time I call you “sis,” or when I tell others that you are my sister, I mean it from my heart. You are not just family by name, but family by love.
+
+Thank you for being so caring, thoughtful, and genuine. You are honestly the best sister anyone could ask for, and I am very grateful to have you in my life.
+
+With love,
+Dion`;
+
+    const heroImage = document.getElementById("heroImage");
+    const nextBtn = document.getElementById("nextBtn");
+    const buttonRow = document.getElementById("buttonRow");
+    const messageWrap = document.getElementById("messageWrap");
+    const typedEl = document.getElementById("typed");
+
+    let typingTimer = null;
+
+    function typeWriter(text, speedMs = 40) {
+      typedEl.textContent = "";
+      const caret = document.createElement("span");
+      caret.className = "caret";
+      typedEl.appendChild(caret);
+
+      let i = 0;
+      clearInterval(typingTimer);
+
+      typingTimer = setInterval(() => {
+        caret.insertAdjacentText("beforebegin", text.charAt(i));
+        i++;
+
+        if (i >= text.length) {
+          clearInterval(typingTimer);
+          setTimeout(() => caret.remove(), 1200);
+        }
+      }, speedMs);
+    }
+
+    nextBtn.addEventListener("click", () => {
+      heroImage.src = page2Image;
+      heroImage.alt = "Christmas header image";
+      buttonRow.style.display = "none";
+      messageWrap.style.display = "block";
+      typeWriter(message, 40);
+    });
+  </script>
+</body>
+</html>
